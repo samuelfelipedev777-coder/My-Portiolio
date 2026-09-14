@@ -1,14 +1,18 @@
 "use client";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import { useRef, useState } from "react";
 
 import HeaderButton from "./HeaderButton";
 import { styles } from "../types/styles";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { useRef, useState } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const headerRef = useRef<HTMLElement>(null);
   const navigationRef = useRef<HTMLElement>(null);
   const backdropRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<HTMLAnchorElement[]>([]);
@@ -21,11 +25,35 @@ export default function Header() {
   ];
 
   useGSAP(() => {
+    const header = headerRef.current;
     const navigation = navigationRef.current;
     const backdrop = backdropRef.current;
 
-    if (!navigation || !backdrop) return;
+    if (!header || !navigation || !backdrop) return;
 
+    // Header scroll effect
+    ScrollTrigger.create({
+      trigger: "#hero",
+      start: "top -480px",
+
+      onEnter: () => {
+        gsap.to(header, {
+          backdropFilter: "blur(5px)",
+          backgroundColor: "rgba(255, 255, 255, 0.08)",
+          duration: 0.3,
+        });
+      },
+
+      onLeaveBack: () => {
+        gsap.to(header, {
+          backdropFilter: "blur(0px)",
+          backgroundColor: "rgba(255, 255, 255, 0)",
+          duration: 0.3,
+        });
+      },
+    });
+
+    // Navigation animation
     if (isOpen) {
       gsap.set(navigation, {
         xPercent: 100,
@@ -90,7 +118,10 @@ export default function Header() {
   }, [isOpen]);
 
   return (
-    <header className={styles.header.container}>
+    <header
+      ref={headerRef}
+      className={styles.header.container}
+    >
       <div>
         <h2 className="font-heading text-lg">
           Samuel Felipe.

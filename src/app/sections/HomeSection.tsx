@@ -7,6 +7,7 @@ import { useRef } from "react";
 
 import { styles } from "../types/styles";
 import { images } from "../types/images";
+import HeroCta from "../components/HeroCta";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,42 +15,43 @@ export default function HomeSection() {
   const kanjiRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const kanjis = [
-    {
-      kanji: "成長",
-      translation: "Growth",
-      vertical: true,
-      position: "top-[10%] left-[10%] md:top-[10%] md:left-[32%]",
-      mobilePosition: "top-[15%] left-[5%]",
-    },
+  {
+    kanji: "対話",
+    translation: "Comunicação",
+    vertical: true,
+    position: "top-[10%] left-[10%] md:top-[10%] md:left-[32%]",
+    mobilePosition: "top-[15%] left-[5%]",
+  },
 
-    {
-      kanji: "探求",
-      translation: "Discovery",
-      position: "top-[35%] right-[15%]",
-      mobilePosition: "top-[40%] right-[5%]",
-    },
+  {
+    kanji: "創意",
+    translation: "Criatividade",
+    position: "top-[35%] right-[15%]",
+    mobilePosition: "top-[40%] right-[5%]",
+  },
 
-    {
-      kanji: "創造",
-      translation: "Creation",
-      position: "bottom-[5%] left-[5%] md:bottom-[5%] md:left-[5%]",
-      mobilePosition: "bottom-[20%] left-[10%]",
-    },
-  ];
+  {
+    kanji: "責任",
+    translation: "Responsabilidade",
+    position: "bottom-[5%] left-[5%] md:bottom-[5%] md:left-[5%]",
+    mobilePosition: "bottom-[20%] left-[10%]",
+  },
+];
 
   useGSAP(() => {
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: "#hero",
-        start: "top top",
-        end: "bottom top",
-        scrub: 1,
-      }
-    })
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: "#hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: 1,
+        },
+      })
       .to(kanjiRefs.current[0], { y: -100, x: -50 }, 0)
       .to(kanjiRefs.current[1], { y: -80, x: 60 }, 0)
       .to(kanjiRefs.current[2], { y: 70, x: 50 }, 0);
-  })
+  });
 
   return (
     <section id="hero" className={styles.hero.container}>
@@ -85,13 +87,13 @@ export default function HomeSection() {
 
             <div className={styles.hero.kanjiInfo}>
               <span>{item.translation}</span>
-
               <span className={styles.hero.line} />
             </div>
           </div>
         ))}
       </div>
+
+      <HeroCta />
     </section>
   );
 }
-
