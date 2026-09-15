@@ -8,7 +8,6 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-
   --font-sans: var(--font-plus-jakarta);
   --font-heading: var(--font-unbounded);
   --font-japanese: var(--font-japanese);
@@ -27,4 +26,214 @@ body {
   color: var(--foreground);
   font-family: var(--font-plus-jakarta);
   min-height: 100vh;
+}
+
+/* Watch trigger */
+
+.watch-trigger {
+  position: relative;
+}
+
+.watch-play,
+.watch-link {
+  position: relative;
+}
+
+/* Main glitch movement */
+
+.watch-trigger:hover .watch-play,
+.watch-trigger:hover .watch-link {
+  animation: hacker-glitch 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Purple signal */
+
+.watch-play::before,
+.watch-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: #9333ea;
+  mix-blend-mode: multiply;
+}
+
+.watch-trigger:hover .watch-play::before,
+.watch-trigger:hover .watch-link::before {
+  animation: hacker-purple 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Blue signal */
+
+.watch-play::after,
+.watch-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: #2563eb;
+  mix-blend-mode: multiply;
+}
+
+.watch-trigger:hover .watch-play::after,
+.watch-trigger:hover .watch-link::after {
+  animation: hacker-blue 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Main displacement */
+
+@keyframes hacker-glitch {
+  0% {
+    transform: translateX(0);
+  }
+
+  8% {
+    transform: translateX(-4px);
+  }
+
+  16% {
+    transform: translateX(5px);
+  }
+
+  24% {
+    transform: translateX(-3px);
+  }
+
+  34% {
+    transform: translateX(2px);
+  }
+
+  48% {
+    transform: translateX(-1px);
+  }
+
+  65% {
+    transform: translateX(0.5px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Purple channel */
+
+@keyframes hacker-purple {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+    clip-path: inset(0 100% 0 0);
+  }
+
+  10% {
+    opacity: 0.9;
+    transform: translateX(-5px);
+    clip-path: inset(20% 0 55% 0);
+  }
+
+  20% {
+    opacity: 0.7;
+    transform: translateX(-8px);
+    clip-path: inset(65% 0 15% 0);
+  }
+
+  32% {
+    opacity: 0.5;
+    transform: translateX(-4px);
+    clip-path: inset(35% 0 40% 0);
+  }
+
+  48% {
+    opacity: 0.25;
+    transform: translateX(-2px);
+    clip-path: inset(75% 0 5% 0);
+  }
+
+  70% {
+    opacity: 0.08;
+    transform: translateX(-1px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+}
+
+/* Blue channel */
+
+@keyframes hacker-blue {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+    clip-path: inset(100% 0 0 0);
+  }
+
+  12% {
+    opacity: 0.8;
+    transform: translateX(5px);
+    clip-path: inset(55% 0 20% 0);
+  }
+
+  22% {
+    opacity: 0.65;
+    transform: translateX(8px);
+    clip-path: inset(10% 0 70% 0);
+  }
+
+  36% {
+    opacity: 0.45;
+    transform: translateX(4px);
+    clip-path: inset(45% 0 30% 0);
+  }
+
+  52% {
+    opacity: 0.2;
+    transform: translateX(2px);
+    clip-path: inset(80% 0 5% 0);
+  }
+
+  72% {
+    opacity: 0.06;
+    transform: translateX(1px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+}
+
+/* Reusable glitch */
+
+.glitch-hover {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-hover::before,
+.glitch-hover::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.glitch-hover:hover {
+  animation: hacker-glitch 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glitch-hover:hover::before {
+  background: #9333ea;
+  mix-blend-mode: multiply;
+  animation: hacker-purple 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glitch-hover:hover::after {
+  background: #2563eb;
+  mix-blend-mode: multiply;
+  animation: hacker-blue 420ms cubic-bezier(0.16, 1, 0.3, 1);
 }

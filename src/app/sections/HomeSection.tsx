@@ -45,7 +45,7 @@ export default function HomeSection() {
           trigger: "#hero",
           start: "top top",
           end: "bottom top",
-          scrub: 1,
+          scrub: 2,
         },
       })
       .to(kanjiRefs.current[0], { y: -100, x: -50 }, 0)

@@ -135,7 +135,7 @@ export default function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                className={styles.header.navLink}
+                className="glitch-hover"
               >
                 {link.label}
               </a>
@@ -164,7 +164,7 @@ export default function Header() {
                     linksRef.current[index] = element;
                   }
                 }}
-                className={styles.navigation.link}
+                className={`${styles.navigation.link} glitch-hover hover:bg-purple-400 p-2 rounded`}
               >
                 {link.label}
               </a>
