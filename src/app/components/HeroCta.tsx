@@ -3,7 +3,9 @@ import { styles } from "../types/styles";
 
 export default function HeroCta() {
   return (
-    <div className={styles.heroCta.container}>
+    <div
+        id="hero-cta" 
+        className={styles.heroCta.container}>
       <div>
         <h1 className={styles.heroCta.title}>
           SAMUEL

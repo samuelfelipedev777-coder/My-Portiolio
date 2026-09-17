@@ -58,7 +58,7 @@ export const styles = {
 
   heroCta: {
     container:
-      "absolute left-[8%] top-1/2 z-20 -translate-y-1/2",
+      "absolute left-[6%] top-1/2 z-20 -translate-y-1/2",
 
     title:
       "font-heading text-6xl font-medium leading-[0.95] tracking-tight text-black md:text-7xl",

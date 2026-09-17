@@ -4,10 +4,10 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
-
 import { styles } from "../types/styles";
 import { images } from "../types/images";
 import HeroCta from "../components/HeroCta";
+import CodeCard from "../components/CodeCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,19 +39,59 @@ export default function HomeSection() {
 ];
 
   useGSAP(() => {
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: "#hero",
-          start: "top top",
-          end: "bottom top",
-          scrub: 2,
-        },
-      })
-      .to(kanjiRefs.current[0], { y: -100, x: -50 }, 0)
-      .to(kanjiRefs.current[1], { y: -80, x: 60 }, 0)
-      .to(kanjiRefs.current[2], { y: 70, x: 50 }, 0);
+  const timeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#hero",
+      start: "top top",
+      end: "bottom top",
+      scrub: 2.5,
+    },
   });
+
+  timeline
+    .to(kanjiRefs.current[0], {
+      y: -45,
+      x: -20,
+      duration: 1.4,
+      ease: "none",
+    }, 0)
+
+    .to(kanjiRefs.current[1], {
+      y: -75,
+      x: 30,
+      duration: 2,
+      ease: "none",
+    }, 0.15)
+
+    .to(kanjiRefs.current[2], {
+      y: 35,
+      x: 15,
+      duration: 1.8,
+      ease: "none",
+    }, 0.3)
+
+    .to("#hero-cta", {
+      y: -65,
+      x: -25,
+      opacity: 0.75,
+      duration: 2.2,
+      ease: "none",
+    }, 0)
+
+    .to("#typescript-card", {
+      y: -18,
+      x: 12,
+      duration: 1.6,
+      ease: "none",
+    }, 0.4)
+
+    .to("#python-card", {
+      y: 25,
+      x: -25,
+      duration: 2.4,
+      ease: "none",
+    }, 0.2);
+});
 
   return (
     <section id="hero" className={styles.hero.container}>
@@ -75,7 +115,7 @@ export default function HomeSection() {
             }}
             className={`${styles.hero.kanji} ${item.mobilePosition} md:${item.position}`}
           >
-            <h2 className="font-japanese text-5xl md:text-5xl">
+            <h2 className="font-japanese text-5xl md:text-3xl">
               {item.vertical
                 ? item.kanji.split("").map((character) => (
                     <span key={character} className="block">
@@ -94,6 +134,24 @@ export default function HomeSection() {
       </div>
 
       <HeroCta />
+
+      <CodeCard 
+        id="typescript-card"
+        language="TypeScript"
+        code={`const create = (idea: string) => {
+          return idea;
+        };`
+      }/>
+
+      <CodeCard
+        id="python-card"
+        language="Python"
+        code={`def build_future():
+          keep_learning()
+          return "endless"`
+        }
+        position="top"
+      />
     </section>
   );
 }
