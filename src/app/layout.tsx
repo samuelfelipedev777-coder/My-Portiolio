@@ -9,6 +9,7 @@ import {
 import "./globals.css";
 import Header from "./components/Header";
 import SmoothScroll from "./components/SmoothScroll";
+import PageLoader from "./components/PageLoader";
 
 const unbounded = Unbounded({
   variable: "--font-unbounded",
@@ -42,6 +43,7 @@ export default function RootLayout({
       className={`${unbounded.variable} ${plusJakartaSans.variable} ${japanese.variable} antialiased`}
     >
       <body>
+        <PageLoader />
         <Header />
         <SmoothScroll />
         {children}
