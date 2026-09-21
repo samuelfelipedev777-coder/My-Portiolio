@@ -1,3 +1,4 @@
+import AboutSection from "./sections/AboutSection";
 import HomeSection from "./sections/HomeSection";
 
 export default function Home() {
@@ -5,12 +6,8 @@ export default function Home() {
     <main>
       {/* Sections */}
       <HomeSection />
-
-      <section className="h-screen">
-        <div className="h-500 flex items-center justify-center">
-          <h2 className="text-4xl">Second Section</h2>
-        </div>
-      </section>
+      <AboutSection />
+      <section className="h-500"><h1>Teste</h1></section>
     </main>
   );
 }

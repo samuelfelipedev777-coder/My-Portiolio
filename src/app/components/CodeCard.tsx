@@ -1,3 +1,6 @@
+
+import { styles } from "../types/styles";
+
 type CodeCardProps = {
   id?: string;
   language: string;
@@ -6,7 +9,9 @@ type CodeCardProps = {
 };
 
 const highlightCode = (code: string) => {
-  const keywords = /\b(const|let|var|return|function|interface|type|export|import|from|def)\b/g;
+  const keywords =
+    /\b(const|let|var|return|function|interface|type|export|import|from|def)\b/g;
+
   const types = /\b(string|number|boolean|void|any)\b/g;
 
   return code.split("\n").map((line, index) => (
@@ -14,7 +19,10 @@ const highlightCode = (code: string) => {
       {line.split(keywords).map((part, index) => {
         if (keywords.test(part)) {
           return (
-            <span key={index} className="text-purple-600">
+            <span
+              key={index}
+              className={styles.codeCard.keyword}
+            >
               {part}
             </span>
           );
@@ -22,7 +30,10 @@ const highlightCode = (code: string) => {
 
         return part.split(types).map((type, index) =>
           types.test(type) ? (
-            <span key={index} className="text-purple-600">
+            <span
+              key={index}
+              className={styles.codeCard.type}
+            >
               {type}
             </span>
           ) : (
@@ -40,27 +51,29 @@ export default function CodeCard({
   code,
   position = "bottom",
 }: CodeCardProps) {
-    const positionClass = 
-        position === "top"
-        ? "top-25 right-54"
-        : "right-8 bottom-8"; 
+  const positionClass =
+    position === "top"
+      ? styles.codeCard.positionTop
+      : styles.codeCard.positionBottom;
+
   return (
     <div
-      id={id} 
-      className={`absolute right-8 bottom-8 z-20 w-64 text-black ${positionClass}`}>
-      <div className="absolute top-0 right-0 h-6 w-6 border-r border-t border-black/50" />
+      id={id}
+      className={`${styles.codeCard.container} ${positionClass}`}
+    >
+      <div className={styles.codeCard.corner} />
 
-      <div className="font-mono text-xs leading-6">
-        <div className="mb-3 text-[10px] uppercase tracking-[0.2em] text-black/50">
+      <div className={styles.codeCard.content}>
+        <div className={styles.codeCard.language}>
           {language}
         </div>
 
-        <pre className="m-0 whitespace-pre-wrap">
+        <pre className={styles.codeCard.pre}>
           <code>{highlightCode(code)}</code>
         </pre>
       </div>
 
-      <div className="absolute bottom-0 left-0 h-2 w-2 bg-black" />
+      <div className={styles.codeCard.marker} />
     </div>
   );
-};
+}
