@@ -7,6 +7,14 @@ import { useEffect } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
+export let lenisInstance: Lenis | null = null;
+
+let wheelVelocity = 0;
+
+export function resetWheelVelocity() {
+  wheelVelocity = 0;
+}
+
 export default function SmoothScroll() {
   useEffect(() => {
     const lenis = new Lenis({
@@ -15,7 +23,8 @@ export default function SmoothScroll() {
       wheelMultiplier: 2.0,
     });
 
-    let wheelVelocity = 0;
+    lenisInstance = lenis;
+
     let lastWheelTime = performance.now();
 
     const handleWheel = (event: WheelEvent) => {
@@ -32,12 +41,12 @@ export default function SmoothScroll() {
 
       wheelVelocity = Math.max(
         -35,
-        Math.min(35, wheelVelocity)
+        Math.min(35, wheelVelocity),
       );
 
       const intensity = Math.min(
         Math.abs(delta) / 100,
-        1
+        1,
       );
 
       wheelVelocity +=
@@ -62,13 +71,14 @@ export default function SmoothScroll() {
           {
             immediate: false,
             force: true,
-          }
+          },
         );
 
         wheelVelocity *= 0.91;
       }
 
       lenis.raf(deltaTime);
+
       ScrollTrigger.update();
     };
 
@@ -77,8 +87,13 @@ export default function SmoothScroll() {
 
     return () => {
       window.removeEventListener("wheel", handleWheel);
+
       gsap.ticker.remove(update);
+
       lenis.destroy();
+
+      lenisInstance = null;
+      wheelVelocity = 0;
     };
   }, []);
 

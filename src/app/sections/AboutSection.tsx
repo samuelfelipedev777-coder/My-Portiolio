@@ -26,7 +26,7 @@ export default function AboutSection() {
   });
 
   return (
-    <section ref={sectionRef} className={styles.about.section}>
+    <section id="about" ref={sectionRef} className={styles.about.section}>
       <div className={styles.about.container}>
         <TextContent
           text={[
@@ -40,7 +40,7 @@ export default function AboutSection() {
         />
 
         <AnimatedHeading
-          firstText="Sabe quando você usa um sistema e a experiência te faz pensar 'wow'? Crio interfaces e uno lógicas para entregar conforto, fluidez e propósito."
+          firstText="Sabe quando você usa um sistema e a experiência te faz pensar 'wow'? Crio interfaces e uno lógicas para te entregar esse conforto."
           secondText="Mais do que linhas de código, meu foco é resolver problemas reais com atenção a cada detalhe. Deixa eu te mostrar na prática!"
           className={styles.about.heading}
         />

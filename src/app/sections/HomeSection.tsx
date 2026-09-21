@@ -15,83 +15,107 @@ export default function HomeSection() {
   const kanjiRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const kanjis = [
-  {
-    kanji: "対話",
-    translation: "Comunicação",
-    vertical: true,
-    position: "top-[10%] left-[10%] md:top-[10%] md:left-[32%]",
-    mobilePosition: "top-[15%] left-[5%]",
-  },
+    {
+      kanji: "対話",
+      translation: "Comunicação",
+      vertical: true,
+      position: "top-[10%] left-[10%] md:top-[10%] md:left-[32%]",
+      mobilePosition: "top-[8%] left-[8%]",
+    },
 
-  {
-    kanji: "創意",
-    translation: "Criatividade",
-    position: "top-[35%] right-[15%]",
-    mobilePosition: "top-[40%] right-[5%]",
-  },
+    {
+      kanji: "創意",
+      translation: "Criatividade",
+      position: "top-[35%] right-[15%]",
+      mobilePosition: "top-[35%] right-[8%]",
+    },
 
-  {
-    kanji: "責任",
-    translation: "Responsabilidade",
-    position: "bottom-[5%] left-[5%] md:bottom-[5%] md:left-[5%]",
-    mobilePosition: "bottom-[20%] left-[10%]",
-  },
-];
+    {
+      kanji: "責任",
+      translation: "Responsabilidade",
+      position: "bottom-[5%] left-[5%] md:bottom-[5%] md:left-[5%]",
+      mobilePosition: "bottom-[8%] left-[8%]",
+    },
+  ];
 
   useGSAP(() => {
-  const timeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#hero",
-      start: "top top",
-      end: "bottom top",
-      scrub: 2.5,
-    },
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: 2.5,
+      },
+    });
+
+    timeline
+      .to(
+        kanjiRefs.current[0],
+        {
+          y: -45,
+          x: -20,
+          duration: 1.4,
+          ease: "none",
+        },
+        0,
+      )
+
+      .to(
+        kanjiRefs.current[1],
+        {
+          y: -75,
+          x: 30,
+          duration: 2,
+          ease: "none",
+        },
+        0.15,
+      )
+
+      .to(
+        kanjiRefs.current[2],
+        {
+          y: 35,
+          x: 15,
+          duration: 1.8,
+          ease: "none",
+        },
+        0.3,
+      )
+
+      .to(
+        "#hero-cta",
+        {
+          y: -65,
+          x: -25,
+          opacity: 0.75,
+          duration: 2.2,
+          ease: "none",
+        },
+        0,
+      )
+
+      .to(
+        "#typescript-card",
+        {
+          y: -18,
+          x: 12,
+          duration: 1.6,
+          ease: "none",
+        },
+        0.4,
+      )
+
+      .to(
+        "#python-card",
+        {
+          y: 25,
+          x: -25,
+          duration: 2.4,
+          ease: "none",
+        },
+        0.2,
+      );
   });
-
-  timeline
-    .to(kanjiRefs.current[0], {
-      y: -45,
-      x: -20,
-      duration: 1.4,
-      ease: "none",
-    }, 0)
-
-    .to(kanjiRefs.current[1], {
-      y: -75,
-      x: 30,
-      duration: 2,
-      ease: "none",
-    }, 0.15)
-
-    .to(kanjiRefs.current[2], {
-      y: 35,
-      x: 15,
-      duration: 1.8,
-      ease: "none",
-    }, 0.3)
-
-    .to("#hero-cta", {
-      y: -65,
-      x: -25,
-      opacity: 0.75,
-      duration: 2.2,
-      ease: "none",
-    }, 0)
-
-    .to("#typescript-card", {
-      y: -18,
-      x: 12,
-      duration: 1.6,
-      ease: "none",
-    }, 0.4)
-
-    .to("#python-card", {
-      y: 25,
-      x: -25,
-      duration: 2.4,
-      ease: "none",
-    }, 0.2);
-});
 
   return (
     <section id="hero" className={styles.hero.container}>
@@ -115,7 +139,7 @@ export default function HomeSection() {
             }}
             className={`${styles.hero.kanji} ${item.mobilePosition} md:${item.position}`}
           >
-            <h2 className="font-japanese text-5xl md:text-3xl">
+            <h2 className="font-japanese text-4xl leading-none sm:text-5xl md:text-3xl">
               {item.vertical
                 ? item.kanji.split("").map((character) => (
                     <span key={character} className="block">
@@ -135,21 +159,20 @@ export default function HomeSection() {
 
       <HeroCta />
 
-      <CodeCard 
+      <CodeCard
         id="typescript-card"
         language="TypeScript"
         code={`const create = (idea: string) => {
           return idea;
-        };`
-      }/>
+        };`}
+      />
 
       <CodeCard
         id="python-card"
         language="Python"
         code={`def build_future():
           keep_learning()
-          return "endless"`
-        }
+          return "endless"`}
         position="top"
       />
     </section>

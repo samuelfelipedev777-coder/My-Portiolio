@@ -1,5 +1,6 @@
 import AboutSection from "./sections/AboutSection";
 import HomeSection from "./sections/HomeSection";
+import ProjectsSection from "./sections/ProjectsSection";
 
 export default function Home() {
   return (
@@ -7,7 +8,7 @@ export default function Home() {
       {/* Sections */}
       <HomeSection />
       <AboutSection />
-      <section className="h-500"><h1>Teste</h1></section>
+      <ProjectsSection />
     </main>
   );
 }

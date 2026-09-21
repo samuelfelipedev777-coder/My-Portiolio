@@ -1,10 +1,13 @@
 "use client";
+
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useRef, useState } from "react";
+import type { MouseEvent } from "react";
 
 import HeaderButton from "./HeaderButton";
+import { lenisInstance } from "./SmoothScroll";
 import { styles } from "../types/styles";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -18,11 +21,28 @@ export default function Header() {
   const linksRef = useRef<HTMLAnchorElement[]>([]);
 
   const links = [
-    { href: "/", label: "Início" },
-    { href: "/about", label: "Sobre" },
-    { href: "/gallery", label: "Projetos" },
-    { href: "/contact", label: "Contato" },
+    { href: "#hero", label: "Início" },
+    { href: "#about", label: "Sobre" },
+    { href: "#projects", label: "Projetos" },
+    { href: "#contact", label: "Contato" },
   ];
+
+  const handleNavigation = (
+    event: MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    event.preventDefault();
+
+    if (!lenisInstance) return;
+
+    lenisInstance.scrollTo(href, {
+      duration: 1.8,
+      easing: (t) => 1 - Math.pow(1 - t, 4),
+      lock: true,
+    });
+
+    setIsOpen(false);
+  };
 
   useGSAP(() => {
     const header = headerRef.current;
@@ -31,7 +51,6 @@ export default function Header() {
 
     if (!header || !navigation || !backdrop) return;
 
-    // Header scroll effect
     ScrollTrigger.create({
       trigger: "#hero",
       start: "top -480px",
@@ -53,7 +72,6 @@ export default function Header() {
       },
     });
 
-    // Navigation animation
     if (isOpen) {
       gsap.set(navigation, {
         xPercent: 100,
@@ -77,6 +95,7 @@ export default function Header() {
           duration: 0.8,
           ease: "power4.out",
         })
+
         .to(
           backdrop,
           {
@@ -84,8 +103,9 @@ export default function Header() {
             duration: 0.5,
             ease: "power2.out",
           },
-          "<"
+          "<",
         )
+
         .to(
           linksRef.current,
           {
@@ -95,7 +115,7 @@ export default function Header() {
             stagger: 0.08,
             ease: "power3.out",
           },
-          "-=0.4"
+          "-=0.4",
         );
     } else {
       gsap.to(navigation, {
@@ -108,6 +128,7 @@ export default function Header() {
         opacity: 0,
         duration: 0.4,
         ease: "power2.out",
+
         onComplete: () => {
           gsap.set(backdrop, {
             pointerEvents: "none",
@@ -118,14 +139,9 @@ export default function Header() {
   }, [isOpen]);
 
   return (
-    <header
-      ref={headerRef}
-      className={styles.header.container}
-    >
+    <header ref={headerRef} className={styles.header.container}>
       <div>
-        <h2 className="font-heading text-lg">
-          Samuel Felipe.
-        </h2>
+        <h2 className="font-heading text-lg">Samuel Felipe.</h2>
       </div>
 
       <div className={styles.header.content}>
@@ -135,6 +151,7 @@ export default function Header() {
               <a
                 key={link.href}
                 href={link.href}
+                onClick={(event) => handleNavigation(event, link.href)}
                 className="glitch-hover"
               >
                 {link.label}
@@ -150,15 +167,13 @@ export default function Header() {
           style={{ pointerEvents: "none" }}
         />
 
-        <nav
-          ref={navigationRef}
-          className={styles.navigation.panel}
-        >
+        <nav ref={navigationRef} className={styles.navigation.panel}>
           <div className={styles.navigation.linkList}>
             {links.map((link, index) => (
               <a
                 key={link.href}
                 href={link.href}
+                onClick={(event) => handleNavigation(event, link.href)}
                 ref={(element) => {
                   if (element) {
                     linksRef.current[index] = element;
@@ -172,10 +187,7 @@ export default function Header() {
           </div>
         </nav>
 
-        <HeaderButton
-          onClick={() => setIsOpen(!isOpen)}
-          isOpen={isOpen}
-        />
+        <HeaderButton onClick={() => setIsOpen(!isOpen)} isOpen={isOpen} />
       </div>
     </header>
   );
