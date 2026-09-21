@@ -18,10 +18,10 @@ export default function Header() {
   const linksRef = useRef<HTMLAnchorElement[]>([]);
 
   const links = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/gallery", label: "Gallery" },
-    { href: "/features", label: "Features" },
+    { href: "/", label: "Início" },
+    { href: "/about", label: "Sobre" },
+    { href: "/gallery", label: "Projetos" },
+    { href: "/contact", label: "Contato" },
   ];
 
   useGSAP(() => {

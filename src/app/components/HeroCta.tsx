@@ -17,7 +17,7 @@ export default function HeroCta() {
       </div>
 
       <div className={styles.heroCta.watchTrigger}>
-        <button aria-label="Watch video" className={styles.heroCta.watchPlay}>
+        <button aria-label="Assistir Vídeo de showcase" className={styles.heroCta.watchPlay}>
           <FaPlay className={styles.heroCta.playIcon} />
         </button>
 
@@ -26,7 +26,7 @@ export default function HeroCta() {
         </span>
       </div>
 
-      <button className={styles.heroCta.exploreButton}>Explore my work</button>
+      <button className={styles.heroCta.exploreButton}>Conheça meu trabalho</button>
     </div>
   );
 }
