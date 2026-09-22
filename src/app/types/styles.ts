@@ -1,18 +1,22 @@
-
 export const styles = {
   header: {
     container:
       "fixed top-0 left-0 z-50 flex w-full items-center justify-between px-5 py-5 md:px-10 md:py-6",
+
     content: "flex items-center gap-20",
+
     nav: "flex gap-10",
   },
 
   navigation: {
     backdrop:
       "fixed inset-0 z-40 bg-black/10 backdrop-blur-[2px]",
+
     panel:
       "fixed top-0 right-0 z-50 h-screen w-full bg-white px-8 py-28 sm:w-[420px] sm:px-12",
+
     linkList: "flex flex-col gap-6",
+
     link: "font-heading text-4xl leading-none text-black",
   },
 
@@ -95,10 +99,10 @@ export const styles = {
 
   projects: {
     section:
-      "relative bg-[#0F0F0F] px-6 py-24 text-white md:px-24 md:py-32",
+      "relative bg-[#0F0F0F] px-3 py-24 text-white sm:px-4 md:px-6 md:py-32",
 
     container:
-      "mx-auto w-full max-w-7xl",
+      "mx-auto w-full max-w-none",
 
     heading:
       "mb-20 text-xs font-medium uppercase tracking-[0.2em] text-white/60 md:mb-28",
@@ -142,7 +146,7 @@ export const styles = {
       "font-japanese text-4xl font-light leading-none text-white transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-[-5px] sm:text-5xl md:text-7xl",
 
     meaning:
-      "text-center text-xs font-medium tracking-[0.1em] text-[#B84A18] sm:text-sm md:text-base",
+      "absolute left-0 top-10 text-center text-xs font-medium tracking-[0.1em] text-[#B84A18] sm:top-12 sm:text-sm md:top-20 md:text-base",
 
     preview:
       "pointer-events-none fixed left-0 top-0 z-40 hidden w-[280px] overflow-hidden opacity-0 md:block md:w-[360px]",
@@ -210,7 +214,7 @@ export const styles = {
       "pointer-events-none absolute z-20 w-64 text-black opacity-75 sm:w-72 sm:opacity-85 md:pointer-events-auto md:w-80 md:opacity-100",
 
     positionTop:
-      "top-[72%] right-2 md:top-25 md:right-54",
+      "top-[72%] right-2 md:top-25 md:right-35",
 
     positionBottom:
       "right-2 bottom-[-100px] md:right-8 md:bottom-8",
