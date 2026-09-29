@@ -1,230 +1,223 @@
 "use client";
+
 import { useRef } from "react";
+
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+
 gsap.registerPlugin(useGSAP);
 
 export default function PageLoader() {
   const loaderRef = useRef<HTMLDivElement>(null);
+  const eyebrowRef = useRef<HTMLSpanElement>(null);
   const nameRef = useRef<HTMLDivElement>(null);
-  const progressRef = useRef<SVGCircleElement>(null);
-  const iconRef = useRef<HTMLDivElement>(null);
-  const statusRef = useRef<HTMLSpanElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
+  const counterRef = useRef<HTMLSpanElement>(null);
+  const statusRef = useRef<HTMLSpanElement>(null);
 
   useGSAP(() => {
+    const loader = loaderRef.current;
+    const eyebrow = eyebrowRef.current;
+    const name = nameRef.current;
+    const line = lineRef.current;
+    const progressLine = progressRef.current;
+    const counter = counterRef.current;
+    const status = statusRef.current;
+
+    if (
+      !loader ||
+      !eyebrow ||
+      !name ||
+      !line ||
+      !progressLine ||
+      !counter ||
+      !status
+    ) {
+      return;
+    }
+
     const progress = { value: 0 };
 
-    document.body.style.overflow = "hidden";
+    const lockScroll = () => {
+      window.scrollTo(0, 0);
+
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+    };
+
+    const unlockScroll = () => {
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+
+      window.scrollTo(0, 0);
+    };
+
+    lockScroll();
+
+    const handleScroll = () => {
+      window.scrollTo(0, 0);
+    };
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: false,
+    });
+
+    gsap.set(eyebrow, {
+      y: 12,
+      opacity: 0,
+    });
+
+    gsap.set(name, {
+      yPercent: 100,
+      opacity: 0,
+    });
+
+    gsap.set(line, {
+      scaleX: 0,
+      transformOrigin: "left center",
+    });
+
+    gsap.set(progressLine, {
+      scaleX: 0,
+      transformOrigin: "left center",
+    });
+
+    gsap.set(counter, {
+      opacity: 0,
+      y: 8,
+    });
+
+    gsap.set(status, {
+      opacity: 0,
+    });
 
     const timeline = gsap.timeline({
       defaults: {
         ease: "power3.out",
       },
-
       onComplete: () => {
-        document.body.style.overflow = "";
+        unlockScroll();
       },
     });
 
-    gsap.set(loaderRef.current, {
-      autoAlpha: 1,
-    });
-
-    gsap.set(nameRef.current, {
-      yPercent: 110,
-      opacity: 0,
-      filter: "blur(8px)",
-    });
-
-    gsap.set(progressRef.current, {
-      strokeDashoffset: 283,
-    });
-
-    gsap.set(iconRef.current, {
-      rotation: 0,
-      scale: 0.8,
-      opacity: 0,
-    });
-
-    gsap.set(statusRef.current, {
-      opacity: 0,
-      y: 10,
-    });
-
-    gsap.set(lineRef.current, {
-      scaleX: 0,
-      transformOrigin: "left center",
-    });
-
     timeline
-
-      .to(nameRef.current, {
-        yPercent: 0,
+      .to(eyebrow, {
+        y: 0,
         opacity: 1,
-        filter: "blur(0px)",
-        duration: 1.5,
-        ease: "power4.out",
+        duration: 0.35,
       })
-
-      .to(nameRef.current, {
-        y: -3,
-        duration: 1,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: 1,
-      })
-
       .to(
-        lineRef.current,
+        name,
+        {
+          yPercent: 0,
+          opacity: 1,
+          duration: 0.7,
+          ease: "power4.out",
+        },
+        "-=0.15",
+      )
+      .to(
+        line,
         {
           scaleX: 1,
-          duration: 0.8,
+          duration: 0.5,
           ease: "power3.out",
         },
-        "-=0.7",
+        "-=0.3",
       )
-
       .to(
-        iconRef.current,
+        counter,
         {
-          opacity: 1,
-          scale: 1,
-          duration: 1,
-          ease: "back.out(1.4)",
-        },
-        "-=0.5",
-      )
-
-      .to(
-        statusRef.current,
-        {
-          opacity: 1,
           y: 0,
-          duration: 0.8,
-          ease: "power3.out",
+          opacity: 1,
+          duration: 0.3,
         },
-        "-=0.7",
+        "-=0.25",
       )
-
+      .to(
+        status,
+        {
+          opacity: 1,
+          duration: 0.3,
+        },
+        "-=0.2",
+      )
       .to(
         progress,
         {
           value: 100,
-          duration: 3.2,
+          duration: 1.35,
           ease: "power2.inOut",
-
           onUpdate: () => {
-            if (progressRef.current) {
-              const circumference = 283;
+            const value = Math.round(progress.value);
 
-              const offset =
-                circumference - (progress.value / 100) * circumference;
-
-              progressRef.current.style.strokeDashoffset = `${offset}`;
-            }
+            progressLine.style.transform = `scaleX(${progress.value / 100})`;
+            counter.textContent = value.toString().padStart(2, "0");
           },
         },
-        "-=0.3",
+        "-=0.05",
       )
-
+      .to(name, {
+        yPercent: -100,
+        opacity: 0,
+        duration: 0.55,
+        ease: "power4.in",
+      })
       .to(
-        iconRef.current,
+        eyebrow,
         {
-          rotation: 360,
-          duration: 1.8,
-          ease: "power2.inOut",
+          y: -10,
+          opacity: 0,
+          duration: 0.35,
         },
         "<",
       )
-
-      .to(statusRef.current, {
-        duration: 0.2,
-
-        onStart: () => {
-          if (statusRef.current) {
-            statusRef.current.textContent = "Tudo pronto.";
-          }
-        },
-      })
-
-      .to(nameRef.current, {
-        yPercent: -110,
-        opacity: 0,
-        filter: "blur(6px)",
-        duration: 1.2,
-        ease: "power4.inOut",
-      })
-
       .to(
-        lineRef.current,
+        line,
         {
           scaleX: 0,
           transformOrigin: "right center",
-          duration: 0.6,
+          duration: 0.35,
           ease: "power3.inOut",
         },
-        "-=0.8",
+        "<",
       )
-
       .to(
-        loaderRef.current,
+        loader,
         {
-          autoAlpha: 0,
-          duration: 1.2,
-          ease: "power2.inOut",
+          yPercent: -100,
+          duration: 0.75,
+          ease: "power4.inOut",
         },
-        "-=0.4",
+        "-=0.05",
       );
 
     return () => {
-      document.body.style.overflow = "";
+      window.removeEventListener("scroll", handleScroll);
+      unlockScroll();
     };
   }, []);
 
   return (
     <div
       ref={loaderRef}
-      className="
-      fixed inset-0 z-100
-      flex h-screen w-full
-      items-center justify-center
-      overflow-hidden
-      bg-white
-      text-black
-    "
+      className="fixed inset-0 z-[100] flex h-[100dvh] w-full items-center justify-center overflow-hidden bg-white text-black"
     >
-      <div className="flex w-full flex-col items-center px-6">
-        <span
-          className="
-          mb-7
-          text-center
-          font-mono
-          text-[11px]
-          font-medium
-          uppercase
-          tracking-[0.25em]
-          text-black/55
-        "
-        >
-          Criando ideias. Construindo experiências.
-        </span>
+      <div className="flex w-full max-w-[1200px] flex-col px-6 sm:px-10 md:px-16">
+        <div className="overflow-hidden">
+          <span
+            ref={eyebrowRef}
+            className="block font-mono text-[9px] font-medium uppercase tracking-[0.25em] text-black/45 sm:text-[10px]"
+          >
+            Samuel Felipe — Developer
+          </span>
+        </div>
 
-        <div className="w-full overflow-hidden">
+        <div className="mt-5 overflow-hidden sm:mt-6 md:mt-8">
           <div
             ref={nameRef}
-            className="
-            mx-auto
-            w-fit
-            whitespace-nowrap
-            text-center
-            font-heading
-            text-[clamp(2.5rem,8vw,7rem)]
-            font-normal
-            leading-none
-            tracking-[-0.07em]
-            text-black
-          "
+            className="font-heading text-[clamp(2.8rem,9vw,8rem)] font-normal leading-[0.85] tracking-[-0.075em] text-black"
           >
             SAMUEL FELIPE
           </div>
@@ -232,72 +225,31 @@ export default function PageLoader() {
 
         <div
           ref={lineRef}
-          className="
-          mt-7
-          h-px
-          w-24
-          bg-[#8B5CF6]
-        "
+          className="mt-8 h-px w-full max-w-[420px] bg-[#8B5CF6] sm:mt-10"
         />
 
-        <div className="relative mt-12 flex h-24 w-24 items-center justify-center">
-          <svg
-            className="absolute inset-0 h-full w-full -rotate-90"
-            viewBox="0 0 100 100"
+        <div className="mt-4 flex w-full max-w-[420px] items-center justify-between">
+          <span
+            ref={statusRef}
+            className="font-mono text-[8px] uppercase tracking-[0.22em] text-black/40 sm:text-[9px]"
           >
-            <circle
-              cx="50"
-              cy="50"
-              r="45"
-              fill="none"
-              stroke="black"
-              strokeOpacity="0.1"
-              strokeWidth="1"
-            />
+            Loading experience
+          </span>
 
-            <circle
-              ref={progressRef}
-              cx="50"
-              cy="50"
-              r="45"
-              fill="none"
-              stroke="#8B5CF6"
-              strokeWidth="1.5"
-              strokeDasharray="283"
-              strokeDashoffset="283"
-              strokeLinecap="round"
-            />
-          </svg>
-
-          <div
-            ref={iconRef}
-            className="
-            font-mono
-            text-[15px]
-            font-medium
-            tracking-[-0.08em]
-            text-black
-          "
+          <span
+            ref={counterRef}
+            className="font-mono text-[9px] tracking-[0.15em] text-black/50 sm:text-[10px]"
           >
-            &lt; / &gt;
-          </div>
+            00
+          </span>
         </div>
 
-        <span
-          ref={statusRef}
-          className="
-          mt-8
-          text-center
-          font-mono
-          text-[11px]
-          font-medium
-          uppercase
-          tracking-[0.22em]
-          text-black/55
-        "
-        >
-          Preparando sua experiência...
-        </span>
+        <div className="mt-2 h-px w-full max-w-[420px] overflow-hidden bg-black/10">
+          <div
+            ref={progressRef}
+            className="h-full w-full bg-[#8B5CF6]"
+          />
+        </div>
       </div>
     </div>
   );
