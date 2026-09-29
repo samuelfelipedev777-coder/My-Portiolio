@@ -1,5 +1,4 @@
 "use client";
-
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -51,26 +50,51 @@ export default function Header() {
 
     if (!header || !navigation || !backdrop) return;
 
-    ScrollTrigger.create({
-      trigger: "#hero",
-      start: "top -480px",
+    let lastScroll = 0;
 
-      onEnter: () => {
-        gsap.to(header, {
-          backdropFilter: "blur(5px)",
-          backgroundColor: "rgba(255, 255, 255, 0.08)",
-          duration: 0.3,
-        });
-      },
+    const updateHeader = (currentScroll: number) => {
+      const scrollDifference = currentScroll - lastScroll;
 
-      onLeaveBack: () => {
+      if (Math.abs(scrollDifference) < 2) {
+        return;
+      }
+
+      if (currentScroll <= 20) {
         gsap.to(header, {
-          backdropFilter: "blur(0px)",
+          yPercent: 0,
           backgroundColor: "rgba(255, 255, 255, 0)",
-          duration: 0.3,
+          backdropFilter: "blur(0px)",
+          duration: 0.45,
+          ease: "power3.out",
         });
-      },
-    });
+      } else if (scrollDifference > 0 && !isOpen) {
+        gsap.to(header, {
+          yPercent: -100,
+          duration: 0.45,
+          ease: "power3.out",
+        });
+      } else if (scrollDifference < 0) {
+        gsap.to(header, {
+          yPercent: 0,
+          backgroundColor: "rgba(255, 255, 255, 0.72)",
+          backdropFilter: "blur(6px)",
+          duration: 0.45,
+          ease: "power3.out",
+        });
+      }
+
+      lastScroll = currentScroll;
+    };
+
+    const handleScroll = (event: {
+      scroll: number;
+    }) => {
+      updateHeader(event.scroll);
+    };
+
+    if (lenisInstance) {
+      lenisInstance.on("scroll", handleScroll);
+    }
 
     if (isOpen) {
       gsap.set(navigation, {
@@ -95,7 +119,6 @@ export default function Header() {
           duration: 0.8,
           ease: "power4.out",
         })
-
         .to(
           backdrop,
           {
@@ -105,7 +128,6 @@ export default function Header() {
           },
           "<",
         )
-
         .to(
           linksRef.current,
           {
@@ -117,6 +139,14 @@ export default function Header() {
           },
           "-=0.4",
         );
+
+      gsap.to(header, {
+        yPercent: 0,
+        backgroundColor: "rgba(255, 255, 255, 0)",
+        backdropFilter: "blur(0px)",
+        duration: 0.4,
+        ease: "power3.out",
+      });
     } else {
       gsap.to(navigation, {
         xPercent: 100,
@@ -128,7 +158,6 @@ export default function Header() {
         opacity: 0,
         duration: 0.4,
         ease: "power2.out",
-
         onComplete: () => {
           gsap.set(backdrop, {
             pointerEvents: "none",
@@ -136,6 +165,12 @@ export default function Header() {
         },
       });
     }
+
+    return () => {
+      if (lenisInstance) {
+        lenisInstance.off("scroll", handleScroll);
+      }
+    };
   }, [isOpen]);
 
   return (
@@ -187,7 +222,10 @@ export default function Header() {
           </div>
         </nav>
 
-        <HeaderButton onClick={() => setIsOpen(!isOpen)} isOpen={isOpen} />
+        <HeaderButton
+          onClick={() => setIsOpen(!isOpen)}
+          isOpen={isOpen}
+        />
       </div>
     </header>
   );

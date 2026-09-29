@@ -1,13 +1,22 @@
 export const styles = {
   header: {
     container:
-      "fixed top-0 left-0 z-50 flex w-full items-center justify-between px-5 py-5 md:px-10 md:py-6",
+      "fixed top-0 left-0 z-50 flex w-full items-center justify-between border-b border-transparent bg-transparent px-5 py-5 transition-colors md:px-10 md:py-6",
+
+    logo:
+      "relative z-10 shrink-0",
 
     content:
-      "flex items-center gap-20",
+      "relative z-10 flex items-center gap-20",
 
     nav:
       "flex gap-10",
+
+    progressTrack:
+      "pointer-events-none absolute bottom-0 left-0 h-px w-full overflow-hidden bg-black/[0.04]",
+
+    progress:
+      "h-full w-full origin-left scale-x-0 bg-purple-600",
   },
 
   navigation: {
@@ -283,7 +292,7 @@ export const styles = {
       "pointer-events-none absolute right-0 top-1/2 max-w-full -translate-y-1/2",
 
     kanji:
-      "font-japanese text-[9rem] font-light leading-none text-purple-400  md:text-[13rem]",
+      "font-japanese text-[9rem] font-light leading-none text-purple-400 md:text-[13rem]",
 
     copy:
       "relative z-10 min-w-0 max-w-190",
@@ -298,7 +307,7 @@ export const styles = {
       "mt-5 flex w-full min-w-0 items-center gap-4",
 
     scroll:
-      "shrink-0 font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-black bg-purple-400 p-1 rounded",
+      "shrink-0 rounded bg-purple-400 p-1 font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-black",
 
     progressTrack:
       "h-px min-w-0 flex-1 overflow-hidden bg-black/15",
