@@ -1,12 +1,21 @@
 "use client";
+
 import Image from "next/image";
+
 import gsap from "gsap";
+
 import ScrollTrigger from "gsap/ScrollTrigger";
+
 import { useGSAP } from "@gsap/react";
+
 import { useRef } from "react";
+
 import { styles } from "../types/styles";
+
 import { images } from "../types/images";
+
 import HeroCta from "../components/HeroCta";
+
 import CodeCard from "../components/CodeCard";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -20,21 +29,19 @@ export default function HomeSection() {
       translation: "Comunicação",
       vertical: true,
       position: "top-[10%] left-[10%] md:top-[10%] md:left-[32%]",
-      mobilePosition: "top-[8%] left-[8%]",
+      mobilePosition: "top-[8%] left-[-8%]",
     },
-
     {
       kanji: "創意",
       translation: "Criatividade",
       position: "top-[35%] right-[15%]",
-      mobilePosition: "top-[35%] right-[8%]",
+      mobilePosition: "top-[29%] right-[-10%]",
     },
-
     {
       kanji: "責任",
       translation: "Responsabilidade",
       position: "bottom-[5%] left-[5%] md:bottom-[5%] md:left-[5%]",
-      mobilePosition: "bottom-[8%] left-[8%]",
+      mobilePosition: "bottom-[5%] left-[-7%]",
     },
   ];
 
@@ -59,7 +66,6 @@ export default function HomeSection() {
         },
         0,
       )
-
       .to(
         kanjiRefs.current[1],
         {
@@ -70,7 +76,6 @@ export default function HomeSection() {
         },
         0.15,
       )
-
       .to(
         kanjiRefs.current[2],
         {
@@ -81,7 +86,6 @@ export default function HomeSection() {
         },
         0.3,
       )
-
       .to(
         "#hero-cta",
         {
@@ -93,7 +97,6 @@ export default function HomeSection() {
         },
         0,
       )
-
       .to(
         "#typescript-card",
         {
@@ -104,7 +107,6 @@ export default function HomeSection() {
         },
         0.4,
       )
-
       .to(
         "#python-card",
         {
@@ -119,6 +121,24 @@ export default function HomeSection() {
 
   return (
     <section id="hero" className={styles.hero.container}>
+      <div className="pointer-events-none absolute inset-0 z-1 md:hidden">
+        <div className="absolute left-5 top-24 h-px w-16 bg-black/20" />
+
+        <div className="absolute right-5 top-24 font-mono text-[7px] uppercase tracking-[0.3em] text-black/35">
+          01 / 04
+        </div>
+
+        <div className="absolute bottom-7 right-5 h-px w-20 bg-black/15" />
+
+        <div className="absolute bottom-4 left-5 font-mono text-[7px] uppercase tracking-[0.25em] text-black/35">
+          Full-Stack / 2026
+        </div>
+      </div>
+
+      <div className="pointer-events-none absolute left-1/2 top-[24%] z-1 h-[46dvh] w-[76vw] -translate-x-1/2 rounded-full border border-black/6 md:hidden" />
+
+      <div className="pointer-events-none absolute left-1/2 top-[24%] z-1 h-[58dvh] w-[96vw] -translate-x-1/2 rounded-full border border-black/[0.035] md:hidden" />
+
       <Image
         src={images.hero.nextjs}
         alt="Next.js"
@@ -151,6 +171,7 @@ export default function HomeSection() {
 
             <div className={styles.hero.kanjiInfo}>
               <span>{item.translation}</span>
+
               <span className={styles.hero.line} />
             </div>
           </div>

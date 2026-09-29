@@ -35,22 +35,22 @@ export const styles = {
 
   hero: {
     container:
-      "relative flex min-h-[1450px] w-full flex-col items-center justify-start overflow-hidden md:h-screen md:min-h-0 md:flex-row md:items-center md:justify-center",
+      "relative flex min-h-[100dvh] w-full flex-col items-center justify-start overflow-hidden bg-white md:h-screen md:min-h-0 md:flex-row md:items-center md:justify-center",
 
     image:
-      "relative z-0 mt-16 h-[48dvh] min-h-[350px] w-full shrink-0 object-contain object-center md:relative md:mt-0 md:h-full md:min-h-0 md:w-full md:object-center",
+      "relative z-0 mt-[13dvh] h-[49dvh] min-h-[310px] w-[118%] max-w-none shrink-0 translate-x-[2%] object-contain object-center sm:h-[52dvh] sm:w-[108%] md:relative md:mt-0 md:h-full md:min-h-0 md:w-full md:translate-x-0 md:object-center",
 
     content:
       "pointer-events-none absolute inset-0 z-10",
 
     kanji:
-      "absolute flex flex-col items-center",
+      "absolute flex flex-col items-center font-light opacity-55 mix-blend-multiply sm:opacity-70 md:opacity-100",
 
     kanjiInfo:
-      "mt-3 flex flex-col items-center gap-2 text-xs md:text-base",
+      "mt-2 flex flex-col items-center gap-1 text-[7px] uppercase tracking-[0.08em] md:mt-3 md:gap-2 md:text-base md:normal-case md:tracking-normal",
 
     line:
-      "h-px w-10 bg-black md:w-12",
+      "h-px w-6 bg-black/70 md:w-12 md:bg-black",
   },
 
   headerButton: {
@@ -72,28 +72,43 @@ export const styles = {
 
   heroCta: {
     container:
-      "relative left-auto top-auto z-20 mt-8 flex w-[90%] shrink-0 flex-col items-start md:absolute md:left-[6%] md:top-1/2 md:mt-0 md:w-auto md:-translate-y-1/2",
+      "relative z-30 mt-[-1dvh] flex w-[88%] max-w-[390px] shrink-0 flex-col items-start md:absolute md:left-[6%] md:top-1/2 md:mt-0 md:w-auto md:max-w-none md:-translate-y-1/2",
+
+    identity:
+      "relative",
+
+    eyebrow:
+      "mb-3 block font-mono text-[7px] uppercase tracking-[0.25em] text-black/40 md:hidden",
 
     title:
-      "font-heading text-5xl font-medium leading-[0.92] tracking-tight text-black sm:text-6xl md:text-6xl md:leading-[0.95] md:text-7xl",
+      "font-heading text-[3.35rem] font-medium leading-[0.78] tracking-[-0.065em] text-black sm:text-[4.2rem] md:text-6xl md:leading-[0.95] md:text-7xl",
+
+    role:
+      "mt-5 flex items-center gap-3 md:mt-6",
+
+    roleLine:
+      "h-px w-8 bg-purple-500 md:hidden",
 
     subtitle:
-      "mt-5 text-[10px] uppercase tracking-[0.15em] text-neutral-600 md:mt-6 md:text-sm md:tracking-[0.2em]",
+      "text-[9px] uppercase tracking-[0.16em] text-neutral-600 md:text-sm md:tracking-[0.2em]",
 
     watchTrigger:
-      "watch-trigger relative mt-8 flex w-full max-w-80 cursor-pointer items-center gap-3 overflow-hidden border p-1 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.03] active:scale-[0.97] before:absolute before:inset-y-0 before:left-0 before:w-0 before:bg-purple-400 before:transition-[width] before:duration-400 before:linear before:content-[''] hover:before:w-full md:mt-12 md:w-80 md:gap-5",
+      "watch-trigger relative mt-7 flex w-full max-w-[310px] cursor-pointer items-center gap-3 overflow-hidden border border-black/80 p-1 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.03] active:scale-[0.97] before:absolute before:inset-y-0 before:left-0 before:w-0 before:bg-purple-400 before:transition-[width] before:duration-400 before:linear before:content-[''] hover:before:w-full md:mt-12 md:w-80 md:gap-5",
 
     watchPlay:
-      "watch-play relative z-10 flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-full border border-black md:h-14 md:w-14",
+      "watch-play relative z-10 flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-full border border-black md:h-14 md:w-14",
 
     playIcon:
-      "ml-0.5 text-[10px] text-black md:text-[11px]",
+      "ml-0.5 text-[9px] text-black md:text-[11px]",
 
     watchLink:
-      "relative z-10 watch-link text-[10px] sm:text-xs md:text-base",
+      "relative z-10 watch-link flex-1 text-[9px] uppercase tracking-[0.04em] sm:text-xs md:text-base md:normal-case md:tracking-normal",
+
+    watchArrow:
+      "relative z-10 mr-3 text-base text-black/60 md:hidden",
 
     exploreButton:
-      "relative z-10 mt-6 cursor-pointer border border-black bg-black px-6 py-3 text-xs font-medium text-white transition-all duration-300 hover:bg-white hover:text-black md:mt-8 md:px-8 md:py-4 md:text-sm",
+      "relative z-10 mt-3 flex w-full max-w-[310px] cursor-pointer items-center justify-between border-b border-black px-0 py-3 text-[9px] font-medium uppercase tracking-[0.16em] text-black transition-all duration-300 hover:border-purple-500 hover:text-purple-600 md:mt-8 md:w-auto md:max-w-none md:border md:bg-black md:px-8 md:py-4 md:text-xs md:uppercase md:tracking-normal md:text-white md:hover:bg-white md:hover:text-black",
   },
 
   about: {
@@ -224,22 +239,22 @@ export const styles = {
 
   codeCard: {
     container:
-      "pointer-events-none absolute z-20 w-64 text-black opacity-75 sm:w-72 sm:opacity-85 md:pointer-events-auto md:w-80 md:opacity-100",
+      "pointer-events-none absolute z-20 w-44 text-black opacity-30 sm:w-64 sm:opacity-75 md:pointer-events-auto md:w-80 md:opacity-100",
 
     positionTop:
-      "top-[72%] right-2 md:top-25 md:right-35",
+      "top-[58%] right-[-40px] rotate-[2deg] sm:top-[62%] sm:right-2 sm:rotate-0 md:top-25 md:right-35",
 
     positionBottom:
-      "right-2 bottom-[-100px] md:right-8 md:bottom-8",
+      "right-[-35px] bottom-[-35px] -rotate-[2deg] sm:right-2 sm:bottom-[-100px] sm:rotate-0 md:right-8 md:bottom-8",
 
     corner:
       "absolute top-0 right-0 h-6 w-6 border-r border-t border-black/50",
 
     content:
-      "font-mono text-sm leading-8",
+      "font-mono text-[9px] leading-5 sm:text-sm sm:leading-8",
 
     language:
-      "mb-4 text-xs uppercase tracking-[0.2em] text-black/70",
+      "mb-2 text-[8px] uppercase tracking-[0.2em] text-black/70 sm:mb-4 sm:text-xs",
 
     pre:
       "m-0 whitespace-pre-wrap",

@@ -1,19 +1,11 @@
 "use client";
-
 import { useGSAP } from "@gsap/react";
-
 import gsap from "gsap";
-
 import ScrollTrigger from "gsap/ScrollTrigger";
-
 import { useRef, useState } from "react";
-
 import type { MouseEvent } from "react";
-
 import HeaderButton from "./HeaderButton";
-
 import { lenisInstance } from "./SmoothScroll";
-
 import { styles } from "../types/styles";
 
 gsap.registerPlugin(ScrollTrigger);
