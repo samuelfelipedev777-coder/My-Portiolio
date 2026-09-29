@@ -195,7 +195,6 @@ export default function PageLoader() {
     "
     >
       <div className="flex w-full flex-col items-center px-6">
-
         <span
           className="
           mb-7
@@ -210,7 +209,6 @@ export default function PageLoader() {
         >
           Criando ideias. Construindo experiências.
         </span>
-
 
         <div className="w-full overflow-hidden">
           <div

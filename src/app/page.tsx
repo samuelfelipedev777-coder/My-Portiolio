@@ -2,6 +2,7 @@ import Highlights from "./components/Highlights";
 import AboutSection from "./sections/AboutSection";
 import HomeSection from "./sections/HomeSection";
 import ProjectsSection from "./sections/ProjectsSection";
+import TextRevealSection from "./sections/TextRevealSection";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <AboutSection />
       <Highlights />
       <ProjectsSection />
+      <TextRevealSection />
     </main>
   );
 }

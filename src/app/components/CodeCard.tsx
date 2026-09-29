@@ -1,4 +1,3 @@
-
 import { styles } from "../types/styles";
 
 type CodeCardProps = {

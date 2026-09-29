@@ -3,9 +3,11 @@ export const styles = {
     container:
       "fixed top-0 left-0 z-50 flex w-full items-center justify-between px-5 py-5 md:px-10 md:py-6",
 
-    content: "flex items-center gap-20",
+    content:
+      "flex items-center gap-20",
 
-    nav: "flex gap-10",
+    nav:
+      "flex gap-10",
   },
 
   navigation: {
@@ -15,9 +17,11 @@ export const styles = {
     panel:
       "fixed top-0 right-0 z-50 h-screen w-full bg-white px-8 py-28 sm:w-[420px] sm:px-12",
 
-    linkList: "flex flex-col gap-6",
+    linkList:
+      "flex flex-col gap-6",
 
-    link: "font-heading text-4xl leading-none text-black",
+    link:
+      "font-heading text-4xl leading-none text-black",
   },
 
   hero: {
@@ -239,5 +243,70 @@ export const styles = {
 
     type:
       "text-purple-600",
+  },
+
+  textReveal: {
+    section:
+      "relative flex min-h-screen w-full max-w-full items-center justify-center overflow-x-hidden bg-[#F2F1EE] text-[#171717]",
+
+    container:
+      "relative z-10 flex w-full max-w-275 min-w-0 flex-col px-6 md:px-10",
+
+    glow:
+      "pointer-events-none absolute left-1/2 top-1/2 h-[320px] w-[320px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-purple-500/15 blur-[120px] md:h-[440px] md:w-[440px] md:blur-[140px]",
+
+    grid:
+      "pointer-events-none absolute inset-0 opacity-[0.06] bg-[linear-gradient(rgba(0,0,0,0.8)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.8)_1px,transparent_1px)] bg-[size:70px_70px]",
+
+    cornerLabel:
+      "absolute left-6 top-6 z-10 font-mono text-[9px] uppercase tracking-[0.25em] text-black/45 md:left-10 md:top-10",
+
+    header:
+      "mb-7 flex w-full items-center justify-between border-b border-black/10 pb-3",
+
+    meta:
+      "flex min-w-0 items-center gap-3",
+
+    index:
+      "font-mono text-[10px] font-medium tracking-[0.25em] text-purple-700",
+
+    label:
+      "font-mono text-[10px] font-medium tracking-[0.25em] text-black/55",
+
+    total:
+      "font-mono text-[10px] tracking-[0.25em] text-black/35",
+
+    content:
+      "relative flex min-h-[250px] w-full min-w-0 items-center border-b border-black/10 py-10 md:min-h-[300px] md:py-14",
+
+    kanjiWrapper:
+      "pointer-events-none absolute right-0 top-1/2 max-w-full -translate-y-1/2",
+
+    kanji:
+      "font-japanese text-[9rem] font-light leading-none text-purple-400  md:text-[13rem]",
+
+    copy:
+      "relative z-10 min-w-0 max-w-190",
+
+    signal:
+      "mb-4 block font-mono text-[9px] font-medium uppercase tracking-[0.3em] text-purple-700",
+
+    title:
+      "max-w-190 break-words text-[clamp(1.65rem,3.2vw,3.8rem)] font-bold leading-[1.05] tracking-[-0.04em] text-[#171717]",
+
+    footer:
+      "mt-5 flex w-full min-w-0 items-center gap-4",
+
+    scroll:
+      "shrink-0 font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-black bg-purple-400 p-1 rounded",
+
+    progressTrack:
+      "h-px min-w-0 flex-1 overflow-hidden bg-black/15",
+
+    progress:
+      "h-full w-full origin-left scale-x-0 bg-purple-700",
+
+    percent:
+      "shrink-0 font-mono text-[8px] tracking-[0.2em] text-black/45",
   },
 } as const;
