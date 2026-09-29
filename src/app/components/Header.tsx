@@ -1,12 +1,19 @@
 "use client";
+
 import { useGSAP } from "@gsap/react";
+
 import gsap from "gsap";
+
 import ScrollTrigger from "gsap/ScrollTrigger";
+
 import { useRef, useState } from "react";
+
 import type { MouseEvent } from "react";
 
 import HeaderButton from "./HeaderButton";
+
 import { lenisInstance } from "./SmoothScroll";
+
 import { styles } from "../types/styles";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -86,15 +93,19 @@ export default function Header() {
       lastScroll = currentScroll;
     };
 
-    const handleScroll = (event: {
-      scroll: number;
-    }) => {
+    const handleScroll = (event: { scroll: number }) => {
       updateHeader(event.scroll);
     };
 
-    if (lenisInstance) {
-      lenisInstance.on("scroll", handleScroll);
-    }
+    const attachScrollListener = () => {
+      if (lenisInstance) {
+        lenisInstance.on("scroll", handleScroll);
+      }
+    };
+
+    attachScrollListener();
+
+    window.addEventListener("lenis-ready", attachScrollListener);
 
     if (isOpen) {
       gsap.set(navigation, {
@@ -170,6 +181,8 @@ export default function Header() {
       if (lenisInstance) {
         lenisInstance.off("scroll", handleScroll);
       }
+
+      window.removeEventListener("lenis-ready", attachScrollListener);
     };
   }, [isOpen]);
 

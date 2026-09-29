@@ -1,5 +1,4 @@
 "use client";
-
 import Lenis from "lenis";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -25,10 +24,13 @@ export default function SmoothScroll() {
 
     lenisInstance = lenis;
 
+    window.dispatchEvent(new Event("lenis-ready"));
+
     let lastWheelTime = performance.now();
 
     const handleWheel = (event: WheelEvent) => {
       const now = performance.now();
+
       const deltaTime = Math.min(now - lastWheelTime, 50);
 
       lastWheelTime = now;
@@ -39,21 +41,11 @@ export default function SmoothScroll() {
 
       wheelVelocity += delta * 0.045;
 
-      wheelVelocity = Math.max(
-        -35,
-        Math.min(35, wheelVelocity),
-      );
+      wheelVelocity = Math.max(-35, Math.min(35, wheelVelocity));
 
-      const intensity = Math.min(
-        Math.abs(delta) / 100,
-        1,
-      );
+      const intensity = Math.min(Math.abs(delta) / 100, 1);
 
-      wheelVelocity +=
-        delta *
-        0.015 *
-        intensity *
-        (deltaTime / 16.67);
+      wheelVelocity += delta * 0.015 * intensity * (deltaTime / 16.67);
     };
 
     window.addEventListener("wheel", handleWheel, {
@@ -66,13 +58,10 @@ export default function SmoothScroll() {
       if (Math.abs(wheelVelocity) > 0.01) {
         const currentScroll = lenis.scroll;
 
-        lenis.scrollTo(
-          currentScroll + wheelVelocity,
-          {
-            immediate: false,
-            force: true,
-          },
-        );
+        lenis.scrollTo(currentScroll + wheelVelocity, {
+          immediate: false,
+          force: true,
+        });
 
         wheelVelocity *= 0.91;
       }
@@ -83,6 +72,7 @@ export default function SmoothScroll() {
     };
 
     gsap.ticker.add(update);
+
     gsap.ticker.lagSmoothing(0);
 
     return () => {
@@ -93,6 +83,7 @@ export default function SmoothScroll() {
       lenis.destroy();
 
       lenisInstance = null;
+
       wheelVelocity = 0;
     };
   }, []);
