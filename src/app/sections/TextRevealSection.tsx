@@ -23,7 +23,6 @@ const texts = [
       after: ": a internet tá cheia de páginas esquecíveis.",
     },
   },
-
   {
     index: "02",
     label: "PROCESSO",
@@ -34,7 +33,6 @@ const texts = [
       after: ".",
     },
   },
-
   {
     index: "03",
     label: "CONSTRUÇÃO",
@@ -45,7 +43,6 @@ const texts = [
       after: " e desperta curiosidade.",
     },
   },
-
   {
     index: "04",
     label: "SUCESSO",
@@ -60,37 +57,23 @@ const texts = [
 
 export default function TextRevealSection() {
   const sectionRef = useRef<HTMLElement>(null);
-
   const contentRef = useRef<HTMLDivElement>(null);
-
   const textRef = useRef<HTMLHeadingElement>(null);
-
   const labelRef = useRef<HTMLSpanElement>(null);
-
   const indexRef = useRef<HTMLSpanElement>(null);
-
   const kanjiRef = useRef<HTMLDivElement>(null);
-
   const progressRef = useRef<HTMLDivElement>(null);
-
   const glowRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
       const section = sectionRef.current;
-
       const content = contentRef.current;
-
       const text = textRef.current;
-
       const label = labelRef.current;
-
       const index = indexRef.current;
-
       const kanji = kanjiRef.current;
-
       const progress = progressRef.current;
-
       const glow = glowRef.current;
 
       if (
@@ -107,7 +90,6 @@ export default function TextRevealSection() {
       }
 
       let currentIndex = 0;
-
       let transition: gsap.core.Timeline | null = null;
 
       const renderText = (item: (typeof texts)[number]) => {
@@ -118,11 +100,9 @@ export default function TextRevealSection() {
         const highlight = document.createElement("span");
 
         highlight.className = "text-purple-500";
-
         highlight.textContent = item.text.highlight;
 
         text.appendChild(highlight);
-
         text.appendChild(document.createTextNode(item.text.after));
       };
 
@@ -149,11 +129,8 @@ export default function TextRevealSection() {
           })
           .add(() => {
             renderText(item);
-
             kanji.textContent = item.kanji;
-
             label.textContent = item.label;
-
             index.textContent = item.index;
           })
           .set([text, kanji], {
@@ -178,15 +155,10 @@ export default function TextRevealSection() {
 
       const trigger = ScrollTrigger.create({
         trigger: section,
-
         start: "top top",
-
         end: "+=260%",
-
         pin: true,
-
         scrub: 1,
-
         anticipatePin: 1,
 
         onUpdate: (self) => {
@@ -209,15 +181,12 @@ export default function TextRevealSection() {
 
           gsap.set(kanji, {
             rotation: progressValue * 4 - 2,
-
             scale: 1 + progressValue * 0.025,
           });
 
           gsap.set(glow, {
             x: `${progressValue * 30 - 15}%`,
-
             y: `${Math.sin(progressValue * Math.PI) * 12}%`,
-
             opacity: 0.08 + progressValue * 0.08,
           });
         },
@@ -225,11 +194,9 @@ export default function TextRevealSection() {
 
       return () => {
         transition?.kill();
-
         trigger.kill();
       };
     },
-
     {
       scope: sectionRef,
     },
@@ -251,21 +218,32 @@ export default function TextRevealSection() {
       <div ref={contentRef} className={styles.textReveal.container}>
         <div className={styles.textReveal.header}>
           <div className={styles.textReveal.meta}>
-            <span ref={indexRef} className={styles.textReveal.index}>
+            <span
+              ref={indexRef}
+              className={styles.textReveal.index}
+            >
               {texts[0].index}
             </span>
 
-            <span ref={labelRef} className={styles.textReveal.label}>
+            <span
+              ref={labelRef}
+              className={styles.textReveal.label}
+            >
               {texts[0].label}
             </span>
           </div>
 
-          <span className={styles.textReveal.total}>04</span>
+          <span className={styles.textReveal.total}>
+            04
+          </span>
         </div>
 
         <div className={styles.textReveal.content}>
           <div className={styles.textReveal.kanjiWrapper}>
-            <div ref={kanjiRef} className={styles.textReveal.kanji}>
+            <div
+              ref={kanjiRef}
+              className={styles.textReveal.kanji}
+            >
               {texts[0].kanji}
             </div>
           </div>
@@ -275,10 +253,15 @@ export default function TextRevealSection() {
               Disciplina &gt; Motivação
             </span>
 
-            <h2 ref={textRef} className={styles.textReveal.title}>
+            <h2
+              ref={textRef}
+              className={styles.textReveal.title}
+            >
               Saí da bolha ao ver uma{" "}
-              <span className="text-purple-500">verdade</span>: a internet tá
-              cheia de páginas esquecíveis.
+              <span className="text-purple-500">
+                verdade
+              </span>
+              : a internet tá cheia de páginas esquecíveis.
             </h2>
           </div>
         </div>
@@ -295,7 +278,9 @@ export default function TextRevealSection() {
             />
           </div>
 
-          <span className={styles.textReveal.percent}>100%</span>
+          <span className={styles.textReveal.percent}>
+            100%
+          </span>
         </div>
       </div>
     </section>

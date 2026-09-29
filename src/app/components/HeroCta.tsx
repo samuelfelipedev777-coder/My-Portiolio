@@ -1,5 +1,4 @@
 import { FaPlay } from "react-icons/fa";
-
 import { styles } from "../types/styles";
 
 export default function HeroCta() {

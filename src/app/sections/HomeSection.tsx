@@ -1,21 +1,12 @@
 "use client";
-
 import Image from "next/image";
-
 import gsap from "gsap";
-
 import ScrollTrigger from "gsap/ScrollTrigger";
-
 import { useGSAP } from "@gsap/react";
-
 import { useRef } from "react";
-
 import { styles } from "../types/styles";
-
 import { images } from "../types/images";
-
 import HeroCta from "../components/HeroCta";
-
 import CodeCard from "../components/CodeCard";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -35,12 +26,12 @@ export default function HomeSection() {
       kanji: "創意",
       translation: "Criatividade",
       position: "top-[35%] right-[15%]",
-      mobilePosition: "top-[29%] right-[-10%]",
+      mobilePosition: "top-[35%] left-[-70%]",
     },
     {
       kanji: "責任",
       translation: "Responsabilidade",
-      position: "bottom-[5%] left-[5%] md:bottom-[5%] md:left-[5%]",
+      position: "bottom-[5%] left-[85%] md:bottom-[5%] md:left-[5%]",
       mobilePosition: "bottom-[5%] left-[-7%]",
     },
   ];

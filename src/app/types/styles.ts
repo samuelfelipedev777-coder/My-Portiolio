@@ -81,7 +81,7 @@ export const styles = {
       "mb-3 block font-mono text-[7px] uppercase tracking-[0.25em] text-black/40 md:hidden",
 
     title:
-      "font-heading text-[3.35rem] font-medium leading-[0.78] tracking-[-0.065em] text-black sm:text-[4.2rem] md:text-6xl md:leading-[0.95] md:text-7xl",
+      "font-heading text-[3.35rem] font-medium leading-[0.78] tracking-[-0.065em] text-black/80 sm:text-[4.2rem] md:text-6xl md:leading-[0.95] md:text-7xl",
 
     role:
       "mt-5 flex items-center gap-3 md:mt-6",
@@ -271,58 +271,58 @@ export const styles = {
 
   textReveal: {
     section:
-      "relative flex min-h-screen w-full max-w-full items-center justify-center overflow-x-hidden bg-[#F2F1EE] text-[#171717]",
+      "relative flex min-h-[100dvh] w-full max-w-full items-center justify-center overflow-x-hidden bg-[#F2F1EE] px-0 text-[#171717]",
 
     container:
-      "relative z-10 flex w-full max-w-275 min-w-0 flex-col px-6 md:px-10",
+      "relative z-10 flex w-full max-w-275 min-w-0 flex-col px-5 sm:px-8 md:px-10",
 
     glow:
-      "pointer-events-none absolute left-1/2 top-1/2 h-[320px] w-[320px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-purple-500/15 blur-[120px] md:h-[440px] md:w-[440px] md:blur-[140px]",
+      "pointer-events-none absolute left-1/2 top-1/2 h-[220px] w-[220px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-purple-500/15 blur-[90px] sm:h-[300px] sm:w-[300px] sm:blur-[110px] md:h-[440px] md:w-[440px] md:blur-[140px]",
 
     grid:
-      "pointer-events-none absolute inset-0 opacity-[0.06] bg-[linear-gradient(rgba(0,0,0,0.8)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.8)_1px,transparent_1px)] bg-[size:70px_70px]",
+      "pointer-events-none absolute inset-0 opacity-[0.05] bg-[linear-gradient(rgba(0,0,0,0.8)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.8)_1px,transparent_1px)] bg-[size:50px_50px] sm:bg-[size:60px_60px] md:bg-[size:70px_70px]",
 
     cornerLabel:
-      "absolute left-6 top-6 z-10 font-mono text-[9px] uppercase tracking-[0.25em] text-black/45 md:left-10 md:top-10",
+      "absolute left-5 top-5 z-10 font-mono text-[7px] uppercase tracking-[0.22em] text-black/40 sm:left-8 sm:top-7 sm:text-[8px] md:left-10 md:top-10 md:text-[9px]",
 
     header:
-      "mb-7 flex w-full items-center justify-between border-b border-black/10 pb-3",
+      "mb-5 flex w-full items-center justify-between border-b border-black/10 pb-3 sm:mb-7 md:pb-3",
 
     meta:
-      "flex min-w-0 items-center gap-3",
+      "flex min-w-0 items-center gap-2 sm:gap-3",
 
     index:
-      "font-mono text-[10px] font-medium tracking-[0.25em] text-purple-700",
+      "font-mono text-[9px] font-medium tracking-[0.2em] text-purple-700 sm:text-[10px] sm:tracking-[0.25em]",
 
     label:
-      "font-mono text-[10px] font-medium tracking-[0.25em] text-black/55",
+      "truncate font-mono text-[9px] font-medium tracking-[0.18em] text-black/55 sm:text-[10px] sm:tracking-[0.25em]",
 
     total:
-      "font-mono text-[10px] tracking-[0.25em] text-black/35",
+      "font-mono text-[9px] tracking-[0.2em] text-black/35 sm:text-[10px] sm:tracking-[0.25em]",
 
     content:
-      "relative flex min-h-[250px] w-full min-w-0 items-center border-b border-black/10 py-10 md:min-h-[300px] md:py-14",
+      "relative flex min-h-[300px] w-full min-w-0 items-center overflow-hidden border-b border-black/10 py-8 sm:min-h-[340px] sm:py-10 md:min-h-[300px] md:overflow-visible md:py-14",
 
     kanjiWrapper:
-      "pointer-events-none absolute right-0 top-1/2 max-w-full -translate-y-1/2",
+      "pointer-events-none absolute right-[-12%] top-1/2 max-w-full -translate-y-1/2 sm:right-[-5%] md:right-0",
 
     kanji:
-      "font-japanese text-[9rem] font-light leading-none text-purple-400 md:text-[13rem]",
+      "font-japanese text-[7rem] font-light leading-none text-purple-400/35 sm:text-[9rem] md:text-[13rem] md:text-purple-400",
 
     copy:
-      "relative z-10 min-w-0 max-w-190",
+      "relative z-10 min-w-0 max-w-[92%] sm:max-w-[85%] md:max-w-190",
 
     signal:
-      "mb-4 block font-mono text-[9px] font-medium uppercase tracking-[0.3em] text-purple-700",
+      "mb-4 block font-mono text-[8px] font-medium uppercase tracking-[0.24em] text-purple-700 sm:mb-5 sm:text-[9px] sm:tracking-[0.3em] md:mb-4",
 
     title:
-      "max-w-190 break-words text-[clamp(1.65rem,3.2vw,3.8rem)] font-bold leading-[1.05] tracking-[-0.04em] text-[#171717]",
+      "max-w-full break-words text-[clamp(1.7rem,7vw,2.8rem)] font-bold leading-[1.04] tracking-[-0.045em] text-[#171717] sm:text-[clamp(2rem,5vw,3.2rem)] md:max-w-190 md:text-[clamp(1.65rem,3.2vw,3.8rem)] md:leading-[1.05]",
 
     footer:
-      "mt-5 flex w-full min-w-0 items-center gap-4",
+      "mt-5 flex w-full min-w-0 items-center gap-3 sm:mt-6 sm:gap-4",
 
     scroll:
-      "shrink-0 rounded bg-purple-400 p-1 font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-black",
+      "shrink-0 rounded bg-purple-400 px-1.5 py-1 font-mono text-[7px] font-medium uppercase tracking-[0.16em] text-black sm:text-[9px] sm:tracking-[0.2em] md:text-[10px]",
 
     progressTrack:
       "h-px min-w-0 flex-1 overflow-hidden bg-black/15",
@@ -331,6 +331,6 @@ export const styles = {
       "h-full w-full origin-left scale-x-0 bg-purple-700",
 
     percent:
-      "shrink-0 font-mono text-[8px] tracking-[0.2em] text-black/45",
+      "shrink-0 font-mono text-[7px] tracking-[0.15em] text-black/45 sm:text-[8px] sm:tracking-[0.2em]",
   },
 } as const;
