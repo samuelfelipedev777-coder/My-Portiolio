@@ -1,11 +1,8 @@
 "use client";
-
 import { useRef } from "react";
-
-import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-
-gsap.registerPlugin(useGSAP);
+import gsap from "gsap";
+import { resetWheelVelocity } from "./SmoothScroll";
 
 export default function PageLoader() {
   const loaderRef = useRef<HTMLDivElement>(null);
@@ -38,29 +35,93 @@ export default function PageLoader() {
     }
 
     const progress = { value: 0 };
+    let isLoading = true;
 
     const lockScroll = () => {
       window.scrollTo(0, 0);
 
       document.documentElement.style.overflow = "hidden";
       document.body.style.overflow = "hidden";
+
+      document.documentElement.style.overscrollBehavior = "none";
+      document.body.style.overscrollBehavior = "none";
+
+      resetWheelVelocity();
     };
 
     const unlockScroll = () => {
+      isLoading = false;
+
+      resetWheelVelocity();
+
       document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
 
+      document.documentElement.style.overscrollBehavior = "";
+      document.body.style.overscrollBehavior = "";
+
       window.scrollTo(0, 0);
+    };
+
+    const handleWheel = (event: WheelEvent) => {
+      if (!isLoading) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      resetWheelVelocity();
+      window.scrollTo(0, 0);
+    };
+
+    const handleTouchMove = (event: TouchEvent) => {
+      if (!isLoading) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      window.scrollTo(0, 0);
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!isLoading) return;
+
+      const blockedKeys = [
+        "ArrowUp",
+        "ArrowDown",
+        "PageUp",
+        "PageDown",
+        "Home",
+        "End",
+        " ",
+      ];
+
+      if (blockedKeys.includes(event.key)) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        window.scrollTo(0, 0);
+      }
     };
 
     lockScroll();
 
-    const handleScroll = () => {
-      window.scrollTo(0, 0);
-    };
-
-    window.addEventListener("scroll", handleScroll, {
+    window.addEventListener("wheel", handleWheel, {
       passive: false,
+      capture: true,
+    });
+
+    window.addEventListener("touchmove", handleTouchMove, {
+      passive: false,
+      capture: true,
+    });
+
+    window.addEventListener("keydown", handleKeyDown, {
+      capture: true,
+    });
+
+    gsap.set(loader, {
+      yPercent: 0,
+      autoAlpha: 1,
     });
 
     gsap.set(eyebrow, {
@@ -97,6 +158,10 @@ export default function PageLoader() {
         ease: "power3.out",
       },
       onComplete: () => {
+        window.removeEventListener("wheel", handleWheel, true);
+        window.removeEventListener("touchmove", handleTouchMove, true);
+        window.removeEventListener("keydown", handleKeyDown, true);
+
         unlockScroll();
       },
     });
@@ -194,8 +259,15 @@ export default function PageLoader() {
       );
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      unlockScroll();
+      timeline.kill();
+
+      window.removeEventListener("wheel", handleWheel, true);
+      window.removeEventListener("touchmove", handleTouchMove, true);
+      window.removeEventListener("keydown", handleKeyDown, true);
+
+      if (isLoading) {
+        unlockScroll();
+      }
     };
   }, []);
 
@@ -247,7 +319,7 @@ export default function PageLoader() {
         <div className="mt-2 h-px w-full max-w-[420px] overflow-hidden bg-black/10">
           <div
             ref={progressRef}
-            className="h-full w-full bg-[#8B5CF6]"
+            className="h-full w-full origin-left bg-[#8B5CF6]"
           />
         </div>
       </div>
